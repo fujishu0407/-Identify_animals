@@ -7,7 +7,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 category=["airplane","automobile","bird","cat","deer","dog","frog","horse","ship","truck"]
 
-img=load_img("./images/bird1.jpeg")
+img=load_img("./images/airplane1.jpeg")
 temp_img = img.resize((32,32))
 
 temp_img_array = img_to_array(temp_img)
@@ -23,7 +23,7 @@ img_pred=model.predict_classes(temp_img_array)
 
 img_pred = img_pred[0]
 
-print(img_pred)
+print(category[img_pred])
 plt.imshow(img)
 plt.title(category[img_pred])
 plt.show()

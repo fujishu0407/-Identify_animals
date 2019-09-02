@@ -14,17 +14,35 @@ y_train=np_utils.to_categorical(y_train,10)
 y_test=np_utils.to_categorical(y_test,10)
 
 print(y_train)
-for i in range(len(y_train)):
-    y_train[i][0] = 0
-    y_train[i][1] = 0
-    y_train[i][8] = 0
-    y_train[i][9] = 0
+for i in range(len(x_train)):
+    x_train[i][0] = x_train[i][2]
+    x_train[i][1] = x_train[i][3]
+    x_train[i][2] = x_train[i][4]
+    x_train[i][3] = x_train[i][5]
+    x_train[i][4] = x_train[i][6]
+    x_train[i][5] = x_train[i][7]
+    
+    y_train[i][0] = y_train[i][2]
+    y_train[i][1] = y_train[i][3]
+    y_train[i][2] = y_train[i][4]
+    y_train[i][3] = y_train[i][5]
+    y_train[i][4] = y_train[i][6]
+    y_train[i][5] = y_train[i][7]
 
-for i in range(len(y_test)):
-    y_test[i][0] = 0
-    y_test[i][1] = 0
-    y_test[i][8] = 0
-    y_test[i][9] = 0
+
+for i in range(len(x_test)):
+    x_test[i][1] = x_test[i][3]
+    x_test[i][2] = x_test[i][4]
+    x_test[i][3] = x_test[i][5]
+    x_test[i][4] = x_test[i][6]
+    x_test[i][5] = x_test[i][7]
+
+    y_test[i][0] = y_test[i][2]
+    y_test[i][1] = y_test[i][3]
+    y_test[i][2] = y_test[i][4]
+    y_test[i][3] = y_test[i][5]
+    y_test[i][4] = y_test[i][6]
+    y_test[i][5] = y_test[i][7]
 
 print(y_train)
 model=Sequential()
@@ -66,8 +84,8 @@ score=model.evaluate(x_test,y_test,verbose=0)
 print('Test loss:',score[0])
 print('Test accuracy:',score[1])
 
-#dogとcat以外を0にして学習する?
-#取得するデータを選びたい categoricalで挑戦
-
 #Test loss: 3.8658203319549562
 #Test accuracy: 0.3112
+# Test loss: 0.482819014942646
+# Test accuracy: 0.4454
+#まだまだ減少中
