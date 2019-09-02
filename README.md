@@ -1,2 +1,4 @@
-# -Identify_animals
-identify by  keras
+# Identify_animals
+方針
+普通のcifar10での機械学習を完成させる
+カテゴリを減らして動物だけにする
