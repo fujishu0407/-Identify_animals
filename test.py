@@ -14,10 +14,10 @@ temp_img_array = img_to_array(temp_img)
 temp_img_array = temp_img_array.astype('float32')/255.0
 temp_img_array = temp_img_array.reshape((1,32,32,3))
 
-json_string = open('cifar10_cnn.json').read()
+json_string = open('cifar10_animal_cnn.json').read()
 model = model_from_json(json_string)
 model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy'])
-model.load_weights('cifar10_cnn.h5')
+model.load_weights('cifar10_animal_cnn.h5')
 
 img_pred=model.predict_classes(temp_img_array)
 
