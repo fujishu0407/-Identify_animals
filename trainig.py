@@ -7,61 +7,13 @@ from keras.utils import np_utils
 import os
 import numpy as np
 
-import matplotlib.pyplot as plt
-from matplotlib import cm
 
-import random
+data = np.load("animal_data.npy")
 
 
-(x_train,y_train),(x_test,y0_test)=cifar10.load_data()
-
-x_train=x_train.astype('float32')/255.0
-x_test=x_test.astype('float32')/255.0
-
-y_train=np_utils.to_categorical(y_train,10)
-y_test=np_utils.to_categorical(y0_test,10)
-
-for i in reversed(range(len(y_train))):
-    if y_train[i][0] == 1 or y_train[i][1] == 1 or y_train[i][8] == 1 or y_train[i][9] == 1:
-        y_train = np.delete(y_train, i, 0)
-        x_train = np.delete(x_train, i, 0)
-        print("finished",  i, " / 50000")
-    # y_train[i][0] = 0
-    # y_train[i][1] = 0
-    # y_train[i][8] = 0
-    # y_train[i][9] = 0
+x_train, y_train, x_test, y_test = data[0], data[1], data[2], data[3]
 
 
-for i in reversed(range(len(y_test))):
-    if y_test[i][0] == 1 or y_test[i][1] == 1 or y_test[i][8] == 1 or y_test[i][9] == 1:
-        y_test = np.delete(y_test, i, 0)
-        x_test = np.delete(x_test, i, 0)
-        y0_test = np.delete(y0_test, i, 0)
-        print("finished",  i, " / 10000")
-    # y_test[i][0] = 0
-    # y_test[i][1] = 0
-    # y_test[i][8] = 0
-    # y_test[i][9] = 0
-
-
-cifar10_labels = np.array(['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck'])
-
-pos = 1
-index = random.randint(0, x_test.shape[0]/2)
-i = index
-# plt figure set to 16inch x 16inch(1600pixel x 1600 pixel). 
-plt.figure(figsize=(16,5))
-
-# draw cifar10 images and label names
-for img in x_test[index:index+30]:
-    plt.subplot(3, 10, pos)
-    plt.imshow(img)
-    plt.axis('off')
-    plt.title( cifar10_labels[y0_test[i][0]] )
-    pos += 1
-    i += 1
-
-plt.show()
 
 model=Sequential()
 
