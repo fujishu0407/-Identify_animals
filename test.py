@@ -7,7 +7,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 category=["airplane","automobile","bird","cat","deer","dog","frog","horse","ship","truck"]
 
-img=load_img("./images/airplane1.jpeg")
+img=load_img("./images/horse1.jpeg")
 temp_img = img.resize((32,32))
 
 temp_img_array = img_to_array(temp_img)

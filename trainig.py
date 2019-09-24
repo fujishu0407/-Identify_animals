@@ -4,47 +4,13 @@ from keras.layers.pooling import MaxPool2D
 from keras.layers.core import Dense,Activation,Dropout,Flatten
 from keras.datasets import cifar10
 from keras.utils import np_utils
+import os
+import numpy as np
 
-(x_train,y_train),(x_test,y_test)=cifar10.load_data()
+data = np.load("animal_data.npy")
 
-x_train=x_train.astype('float32')/255.0
-x_test=x_test.astype('float32')/255.0
+x_train, y_train, x_test, y_test = data[0], data[1], data[2], data[3]
 
-y_train=np_utils.to_categorical(y_train,10)
-y_test=np_utils.to_categorical(y_test,10)
-
-print(y_train)
-for i in range(len(x_train)):
-    x_train[i][0] = x_train[i][2]
-    x_train[i][1] = x_train[i][3]
-    x_train[i][2] = x_train[i][4]
-    x_train[i][3] = x_train[i][5]
-    x_train[i][4] = x_train[i][6]
-    x_train[i][5] = x_train[i][7]
-    
-    y_train[i][0] = y_train[i][2]
-    y_train[i][1] = y_train[i][3]
-    y_train[i][2] = y_train[i][4]
-    y_train[i][3] = y_train[i][5]
-    y_train[i][4] = y_train[i][6]
-    y_train[i][5] = y_train[i][7]
-
-
-for i in range(len(x_test)):
-    x_test[i][1] = x_test[i][3]
-    x_test[i][2] = x_test[i][4]
-    x_test[i][3] = x_test[i][5]
-    x_test[i][4] = x_test[i][6]
-    x_test[i][5] = x_test[i][7]
-
-    y_test[i][0] = y_test[i][2]
-    y_test[i][1] = y_test[i][3]
-    y_test[i][2] = y_test[i][4]
-    y_test[i][3] = y_test[i][5]
-    y_test[i][4] = y_test[i][6]
-    y_test[i][5] = y_test[i][7]
-
-print(y_train)
 model=Sequential()
 
 model.add(Conv2D(32,(3,3),padding='same',input_shape=(32,32,3)))
@@ -73,8 +39,8 @@ history=model.fit(x_train,y_train,batch_size=128,nb_epoch=20,verbose=1,validatio
 
 #モデルと重みを保存
 json_string=model.to_json()
-open('cifar10_cnn.json',"w").write(json_string)
-model.save_weights('cifar10_cnn.h5')
+open('cifar10_animal_cnn.json',"w").write(json_string)
+model.save_weights('cifar10_animal_cnn.h5')
 
 #モデルの表示
 model.summary()
