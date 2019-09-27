@@ -6,7 +6,7 @@ import numpy as np
 
 x_train=x_train.astype('float32')/255.0
 x_test=x_test.astype('float32')/255.0
-
+ 
 y_train=np_utils.to_categorical(y_train,10)
 y_test=np_utils.to_categorical(y0_test,10)
 
