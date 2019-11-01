@@ -2,6 +2,9 @@ import os
 import numpy as np
 #from model import Model
 import matplotlib.pyplot as plt
+from functools import partial
+
+np.load = partial(np.load, allow_pickle=True) 
 
 data = np.load("animal_data.npy")
 
